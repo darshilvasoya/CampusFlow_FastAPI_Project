@@ -5,3 +5,4 @@ mysql-connector-python
 requests
 passlib[bcrypt]
 python-jose
+python-multipart
