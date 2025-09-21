@@ -1,10 +1,8 @@
-# Environment Variables (MOST IMPORTANT!)
 .env
 .env.local
 .env.production
 .env.staging
 
-# Python
 __pycache__/
 *.py[cod]
 *$py.class
@@ -28,7 +26,6 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# Virtual Environment
 venv/
 env/
 ENV/
@@ -36,14 +33,12 @@ env.bak/
 venv.bak/
 .venv/
 
-# IDE Files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
 
-# Operating System
 .DS_Store
 .DS_Store?
 ._*
@@ -53,30 +48,24 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# Logs
 *.log
 logs/
 
-# Database Files
 *.db
 *.sqlite
 *.sqlite3
 
-# Temporary Files
 *.tmp
 *.temp
 temp/
 
-# Coverage Reports
 htmlcov/
 .coverage
 .coverage.*
 coverage.xml
 
-# Pytest
 .pytest_cache/
 
-# mypy
 .mypy_cache/
 .dmypy.json
 dmypy.json
