@@ -55,7 +55,7 @@ def update_professor(professor_id: int, professor: ProfessorCreate, current_user
         raise
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Failed to update professor: {e}")
-
+        
 @professors_router.delete("/professors/{professor_id}", summary="Delete a professor", tags=['Professors'])
 def delete_professor(professor_id: int, current_user: User = Depends(get_current_admin_user)): # Protected by admin
     try:
