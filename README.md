@@ -7,7 +7,7 @@ A robust backend API for a College Management System, built with FastAPI and Pos
 *   **Base URL:** [https://campusflow-4n9z.onrender.com](https://campusflow-4n9z.onrender.com)
 *   **API Documentation (Swagger UI):** [https://campusflow-4n9z.onrender.com/docs](https://campusflow-4n9z.onrender.com/docs)
 
-**Note on Live Deployment:** Render services, especially on free tiers, may take 1-1.5 minutes to wake up and load if they haven't been accessed recently. Please be patient and wait for a moment if you experience initial delays.
+**Note on Live Deployment:** Render services, may take 1-1.5 minutes to wake up and load if they haven't been accessed recently. Please be patient and wait for a moment if you experience initial delays.
 
 ## Features
 
