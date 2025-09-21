@@ -1,9 +1,7 @@
-# routers/courses.py
-
-from fastapi import APIRouter, HTTPException, Depends # Added Depends
+from fastapi import APIRouter, HTTPException, Depends
 from db.database import get_db_cursor
-from db.models import CourseCreate, User # Added User
-from core.security import get_current_admin_user, get_current_active_user, get_current_professor_user # Added role dependencies
+from db.models import CourseCreate, User
+from core.security import get_current_admin_user, get_current_active_user, get_current_professor_user
 
 course_router = APIRouter()
 

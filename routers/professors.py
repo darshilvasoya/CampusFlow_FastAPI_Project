@@ -1,9 +1,8 @@
-# routers/professors.py
 
-from fastapi import APIRouter, HTTPException, Depends # Added Depends
+from fastapi import APIRouter, HTTPException, Depends
 from db.database import get_db_cursor
-from db.models import ProfessorCreate, User # Added User
-from core.security import get_current_admin_user, get_current_active_user # Added role dependencies
+from db.models import ProfessorCreate, User
+from core.security import get_current_admin_user, get_current_active_user
 
 professors_router = APIRouter()
 
@@ -15,7 +14,6 @@ def create_professor(professor: ProfessorCreate, current_user: User = Depends(ge
             cursor.execute(query, (professor.name, professor.email, professor.department_id, professor.title))
             return {"message": "Professor created successfully"}
     except Exception as e:
-        # Handle foreign key violation specifically
         if "1452" in str(e):
              raise HTTPException(status_code=400, detail=f"Failed to create professor: Department ID {professor.department_id} does not exist.")
         raise HTTPException(status_code=400, detail=f"Failed to create professor: {e}")

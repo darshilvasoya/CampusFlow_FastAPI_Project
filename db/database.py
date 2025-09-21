@@ -1,7 +1,7 @@
 from contextlib import contextmanager
-import psycopg2 # Changed import
-from psycopg2 import Error # Import Error for specific exception handling
-import psycopg2.extras # For dictionary cursor
+import psycopg2
+from psycopg2 import Error
+import psycopg2.extras
 import os
 
 @contextmanager
@@ -15,15 +15,15 @@ def get_db_cursor(commit=False):
             password=os.environ.get("DB_PASSWORD", "password"),
             database=os.environ.get("DB_NAME", "student_database")
         )
-        connection.autocommit = False # Explicitly set autocommit for psycopg2
-        cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor) # Use RealDictCursor
+        connection.autocommit = False
+        cursor = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
         yield cursor
 
         if commit:
             connection.commit()
 
-    except Error as e: # Changed exception type
+    except Error as e:
         if connection:
             connection.rollback()
         raise e

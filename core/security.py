@@ -1,4 +1,3 @@
-# core/security.py
 
 from datetime import datetime, timedelta, timezone
 from typing import Optional
@@ -9,10 +8,9 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 
 from core.config import SECRET_KEY, ALGORITHM, ACCESS_TOKEN_EXPIRE_MINUTES
-from db.models import TokenData, User # Import TokenData and User
-from db.database import get_db_cursor # Added get_db_cursor import
+from db.models import TokenData, User
+from db.database import get_db_cursor
 
-# --- Password Hashing ---
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
@@ -22,7 +20,6 @@ def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
 
 
-# --- JWT Token Creation ---
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_delta:
@@ -35,7 +32,6 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     return encoded_jwt
 
 
-# --- Token Verification and User Retrieval ---
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
@@ -53,28 +49,25 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
     except JWTError:
         raise credentials_exception
     
-    # Fetch the user from the database
     with get_db_cursor() as cursor:
-        query = "SELECT username, email, full_name, disabled, role FROM users WHERE username = %s" # Removed id from SELECT
+        query = "SELECT username, email, full_name, disabled, role FROM users WHERE username = %s"
         cursor.execute(query, (token_data.username,))
         user_data = cursor.fetchone()
         if user_data:
-            # Explicitly create User object to handle potential type mismatches or missing optional fields
             user = User(
                 username=user_data['username'],
                 email=user_data['email'],
                 full_name=user_data['full_name'],
-                disabled=bool(user_data['disabled']), # Explicitly convert to bool
+                disabled=bool(user_data['disabled']),
                 role=user_data['role']
             )
         else:
-            user = None # User not found in DB
+            user = None
     
     if user is None:
         raise credentials_exception
     return user
 
-# --- Role-Based Access Control (RBAC) Dependencies ---
 
 def get_current_active_user(current_user: User = Depends(get_current_user)) -> User:
     if current_user.disabled:

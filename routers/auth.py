@@ -1,16 +1,15 @@
-# routers/auth.py
 
 from datetime import timedelta
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
-from pydantic import BaseModel # Added BaseModel import
+from pydantic import BaseModel
 
-from core.security import create_access_token, verify_password, get_password_hash, get_current_admin_user # Added get_current_admin_user
+from core.security import create_access_token, verify_password, get_password_hash, get_current_admin_user
 from core.config import ACCESS_TOKEN_EXPIRE_MINUTES
 from db.database import get_db_cursor
-from db.models import Token, User, UserInDB # Added User import
+from db.models import Token, User, UserInDB
 
 auth_router = APIRouter(tags=["Authentication"])
 
@@ -44,7 +43,6 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
     return {"access_token": access_token, "token_type": "bearer"}
 
 
-# --- Secure User Registration Endpoint ---
 class UserRegister(BaseModel):
     username: str
     password: str
@@ -55,7 +53,6 @@ class UserRegister(BaseModel):
 def register_user(user: UserRegister):
     with get_db_cursor(commit=True) as cursor:
         hashed_password = get_password_hash(user.password)
-        # Default role is 'student'
         query = "INSERT INTO users (username, hashed_password, email, full_name, role) VALUES (%s, %s, %s, %s, %s)"
         try:
             cursor.execute(query, (user.username, hashed_password, user.email, user.full_name, "student"))
@@ -66,13 +63,11 @@ def register_user(user: UserRegister):
             raise HTTPException(status_code=400, detail=f"Failed to register user: {e}")
 
 
-# --- Admin-only endpoint to change user roles ---
 class UserRoleUpdate(BaseModel):
     role: str
 
 @auth_router.put("/users/{username}/role", summary="Update a user's role (Admin only)")
 def update_user_role(username: str, role_update: UserRoleUpdate, current_user: User = Depends(get_current_admin_user)):
-    # Validate role
     valid_roles = ["admin", "student", "professor"]
     if role_update.role not in valid_roles:
         raise HTTPException(status_code=400, detail=f"Invalid role. Must be one of: {', '.join(valid_roles)}")
