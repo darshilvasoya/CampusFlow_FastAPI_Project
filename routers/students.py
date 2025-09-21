@@ -1,3 +1,5 @@
+from fastapi import APIRouter, Depends, HTTPException, status
+from db.database import get_db_cursor
 from db.models import Student, StudentCreate # Added StudentCreate
 
 student_router = APIRouter(prefix="/students", tags=["Students"])
