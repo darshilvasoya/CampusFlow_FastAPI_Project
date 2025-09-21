@@ -151,7 +151,7 @@ After your service is deployed on Render:
     *   Use the `POST /register` endpoint to create a new user (e.g., username `Your_Registered_Username`, password `Your_Password`). This user will initially have the "student" role.
     *   Connect to your Render database via pgAdmin 4 and run the following SQL command to make this user an admin:
         ```sql
-        UPDATE users SET role = 'admin' WHERE username = 'Your_Registered_Username';
+        UPDATE users SET role = 'admin' WHERE username = 'YOUR_REGISTERED_USERNAME';
         ```
 
 ## Authentication
