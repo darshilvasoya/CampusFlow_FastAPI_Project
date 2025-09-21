@@ -47,6 +47,30 @@ def create_student(student: StudentCreate):
             raise HTTPException(status_code=500, detail=f"Failed to create student: {e}")
 
 
+# --- PUT (update) a student by ID ---
+@student_router.put("/{student_id}", response_model=Student)
+def update_student(student_id: int, student: StudentCreate):
+    with get_db_cursor(commit=True) as cursor:
+        try:
+            query = """
+                UPDATE students
+                SET name = %s, age = %s, email = %s
+                WHERE id = %s
+            """
+            cursor.execute(query, (student.name, student.age, student.email, student_id))
+            if cursor.rowcount == 0:
+                raise HTTPException(status_code=404, detail="Student not found")
+            
+            # Fetch the updated student data to return it
+            cursor.execute("SELECT id, name, age, email FROM students WHERE id = %s", (student_id,))
+            updated_student_data = cursor.fetchone()
+            return Student(**updated_student_data)
+        except Exception as e:
+            if "violates unique constraint" in str(e):
+                raise HTTPException(status_code=400, detail="Email already exists for another student.")
+            raise HTTPException(status_code=500, detail=f"Failed to update student: {e}")
+
+
 # --- DELETE a student by ID ---
 @student_router.delete("/{student_id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_student(student_id: int):
