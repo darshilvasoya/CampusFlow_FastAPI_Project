@@ -71,7 +71,7 @@ def update_user_role(username: str, role_update: UserRoleUpdate, current_user: U
     valid_roles = ["admin", "student", "professor"]
     if role_update.role not in valid_roles:
         raise HTTPException(status_code=400, detail=f"Invalid role. Must be one of: {', '.join(valid_roles)}")
-
+        
     with get_db_cursor(commit=True) as cursor:
         query = "UPDATE users SET role = %s WHERE username = %s"
         cursor.execute(query, (role_update.role, username))
