@@ -2,6 +2,11 @@
 
 A robust backend API for a College Management System, built with FastAPI and PostgreSQL. This API handles student, course, department, enrollment, and professor management, along with a secure authentication system.
 
+## Live Deployed Application
+
+*   **Base URL:** [https://campusflow-4n9z.onrender.com](https://campusflow-4n9z.onrender.com)
+*   **API Documentation (Swagger UI):** [https://campusflow-4n9z.onrender.com/docs](https://campusflow-4n9z.onrender.com/docs)
+
 ## Features
 
 *   **Authentication:** User registration, login (JWT token generation), role-based access control (Admin, Student, Professor).
@@ -142,11 +147,11 @@ After your service is deployed on Render:
 
 1.  **Create Tables on Render Database:** Your Render database will be empty. You need to connect to it using pgAdmin 4 (using the external connection details provided by Render) and run the `CREATE TABLE` SQL commands listed in the "Database Setup" section above.
 2.  **Create Admin User:**
-    *   Go to your deployed API's `/docs` page (e.g., `https://your-service-name.onrender.com/docs`).
-    *   Use the `POST /register` endpoint to create a new user (e.g., username `czon`, password `czon`). This user will initially have the "student" role.
+    *   Go to your deployed API's `/docs` page (e.g., `https://campusflow-4n9z.onrender.com/docs`).
+    *   Use the `POST /register` endpoint to create a new user (e.g., username `Your_Registered_Username`, password `Your_Password`). This user will initially have the "student" role.
     *   Connect to your Render database via pgAdmin 4 and run the following SQL command to make this user an admin:
         ```sql
-        UPDATE users SET role = 'admin' WHERE username = 'czon';
+        UPDATE users SET role = 'admin' WHERE username = 'Your_Registered_Username';
         ```
 
 ## Authentication
@@ -168,3 +173,7 @@ The API uses JWT (JSON Web Tokens) for authentication.
 *   `/departments`: Manage departments
 *   `/enrollments`: Manage enrollments
 *   `/professors`: Manage professor records
+
+## Contact
+
+For any inquiries, please contact: workmail.darshaetherategmail.com
