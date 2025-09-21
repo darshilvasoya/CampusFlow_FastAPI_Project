@@ -27,4 +27,4 @@ app.include_router(professors_router, dependencies=[Depends(get_current_user)])
 
 @app.get("/", tags=["Root"])
 async def read_root():
-    return {"message": "Welcome to the CampusFlow API!"}
+    return {"message": "Welcome to the CampusFlow API! Please write /docs in the url or copy paste this to url https://campusflow-4n9z.onrender.com/docs"}
