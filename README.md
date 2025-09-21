@@ -176,4 +176,4 @@ The API uses JWT (JSON Web Tokens) for authentication.
 
 ## Contact
 
-For any inquiries, please contact: [workmail.darshaetherategmail.com](mailto:workmail.darshaetherategmail.com)
+For any inquiries, please contact: [workmail.darshaetherate@gmail.com](mailto:workmail.darshaetherategmail.com)
