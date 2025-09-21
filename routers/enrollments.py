@@ -39,7 +39,7 @@ def get_enrollment_by_id(enrollment_id: int, current_user: User = Depends(get_cu
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {e}")
-
+        
 @enrollments_router.put("/enrollments/{enrollment_id}", summary="Update an enrollment", tags=['Enrollments'])
 def update_enrollment(enrollment_id: int, enrollment: EnrollmentCreate, current_user: User = Depends(get_current_admin_or_professor_user)): # Protected by admin or professor
     try:
