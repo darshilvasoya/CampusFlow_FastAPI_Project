@@ -32,3 +32,4 @@ def get_db_cursor(commit=False):
             cursor.close()
         if connection:
             connection.close()
+            
