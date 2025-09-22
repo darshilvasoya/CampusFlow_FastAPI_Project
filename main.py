@@ -12,7 +12,7 @@ from routers.professors import professors_router
 
 app = FastAPI(
     title="CampusFlow API",
-    description="The backend for the College Management System.",
+    description="The backend for the College Management System. Admin Username: 'adminuser', Password: 'adminpass'",
     version="1.0.0",
 )
 
