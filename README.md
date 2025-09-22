@@ -9,6 +9,9 @@ A robust backend API for a College Management System, built with FastAPI and Pos
 
 **Note on Live Deployment:** Render services, may take 1-1.5 minutes to wake up and load if they haven't been accessed recently. Please be patient and wait for a moment if you experience initial delays.
 
+* Admin Username: `` adminuser ``
+* Admin Password: `` adminpass ``
+
 ## Features
 
 *   **Authentication:** User registration, login (JWT token generation), role-based access control (Admin, Student, Professor).
