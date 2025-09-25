@@ -2,7 +2,9 @@
 
 A robust backend API for a College Management System, built with FastAPI and PostgreSQL. This API handles student, course, department, enrollment, and professor management, along with a secure authentication system.
 
-## Live Deployed Application
+## Live Deployed Application 
+
+**Note on Live Deployment:** Live-preview is only works for 30 days from this repo post date.
 
 *   **Base URL:** [https://campusflow-4n9z.onrender.com](https://campusflow-4n9z.onrender.com)
 *   **API Documentation (Swagger UI):** [https://campusflow-4n9z.onrender.com/docs](https://campusflow-4n9z.onrender.com/docs)
